@@ -1,0 +1,45 @@
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+
+.form-item {
+  margin-bottom: 1rem;
+}
+
+textarea,
+input[type='text'],
+input[type='search'],
+input[type='number'],
+input[type='email'],
+input[type='date'],
+input[type='tel'],
+input[type='url'],
+select {
+  appearance: none;
+  border: 0;
+  background: var(--white);
+  width: 100%;
+  height: auto;
+  color: var(--text-color);
+  padding: 0.25rem 0.25rem;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.15s ease-out;
+  transition: background-color 0.1s ease-out;
+
+  &:disabled {
+    background-color: var(--gray-lightest);
+    color: var(--gray-light);
+  }
+
+  &.has-error {
+    border-color: var(--color-danger);
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

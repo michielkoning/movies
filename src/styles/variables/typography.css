@@ -1,0 +1,10 @@
+:root {
+  --font-size-base: 22px;
+  --font-family-base: body, sans-serif;
+  --line-height-base: 1.5;
+
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+
+  --font-family-headings: header, sans-serif;
+}
