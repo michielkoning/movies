@@ -12,15 +12,23 @@ fs.readdir(testFolder, (err, files) => {
 
       const data = JSON.parse(jsonString);
       data.Actors = data.Actors.split(',');
-      data.Genre = data.Genre.split(',');
+      data.Genres = data.Genre.split(',');
+      delete data.Genres;
+
+      data.Countries = data.Country.split(',');
+      delete data.Country;
+
+      data.Languages = data.Language.split(',');
+      delete data.Language;
+
       data.Director = getDirector(data.Director);
+      data.imdbRating = Number(data.imdbRating);
 
       // delete data.Awards;
       // delete data.Released;
       // delete data.Rated;
       // delete data.Ratings;
       // delete data.Metascore;
-      data.imdbRating = Number(data.imdbRating);
       // delete data.imdbVotes;
       // delete data.imdbID;
       // delete data.Type;

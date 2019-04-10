@@ -1,5 +1,5 @@
 <template>
-  <div v-if="data">
+  <div v-if="data" style="display: none">
     <meta-info :data="data" />
 
     <div

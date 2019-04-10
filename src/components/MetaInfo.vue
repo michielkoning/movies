@@ -1,6 +1,7 @@
 <template>
   <div v-if="data">
     {{ bestActors }}
+    {{ favoriteActorsCount }}
     <p>
       {{ lowestScore }}
       <span
@@ -42,13 +43,33 @@ export default {
       return newArray;
     },
     bestActors() {
-      return this.actors.reduce((obj, item) => {
+      const countDublicates = this.actors.reduce((obj, item) => {
         if (!obj[item]) {
           obj[item] = 0;
         }
         obj[item]++;
         return obj;
       }, {});
+
+      const testa = Object.keys(countDublicates).map(item => ({
+        title: item,
+        count: countDublicates[item],
+      }));
+      return testa;
+    },
+
+    favoriteActorCount() {
+      return this.bestActors.reduce(
+        (max, actor) => (actor.count > max ? actor.count : max),
+        0,
+      );
+    },
+
+    favoriteActorsCount() {
+      const data = this.bestActors.filter(
+        actor => actor.count === this.favoriteActorCount,
+      );
+      return data;
     },
 
     lowestScore() {
