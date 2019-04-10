@@ -20,7 +20,7 @@ fs.readdir(testFolder, (err, files) => {
       // delete data.Rated;
       // delete data.Ratings;
       // delete data.Metascore;
-      // delete data.imdbRating;
+      data.imdbRating = Number(data.imdbRating);
       // delete data.imdbVotes;
       // delete data.imdbID;
       // delete data.Type;
