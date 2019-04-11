@@ -1,12 +1,11 @@
 <template>
-  <div v-if="data" style="display: none">
-    <meta-info :data="data" />
-
+  <div v-if="data">
     <div
       class="wrapper"
       :class="`sort-by-${sortKey}`"
     >
       <div class="buttons">
+        Sorteer op:
         <button @click="groupByYear">
           Jaar
         </button>
@@ -46,6 +45,7 @@
         </div>
       </transition-group>
     </div>
+    <meta-info :data="data" />
   </div>
 </template>
 
@@ -223,7 +223,7 @@ strong {
   transition: transform 1s;
 }
 
-button + button {
-  margin-right: 0.25;
+button {
+  margin-left: 0.25em;
 }
 </style>

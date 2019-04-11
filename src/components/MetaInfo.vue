@@ -1,26 +1,36 @@
 <template>
-  <div v-if="data">
-    {{ bestActors }}
-    {{ favoriteActorsCount }}
+  <div
+    v-if="data"
+    class="meta-info"
+  >
     <p>
-      {{ lowestScore }}
+      Favoriete acteurs:
+      <span
+        v-for="actor in favoriteActors"
+        :key="actor.title"
+      >{{ actor.title }}, </span>
+    </p>
+    <p>
+      Minst gewaardeerde film
       <span
         v-for="movie in worstMovies"
         :key="movie.Title"
       >
         {{ movie.Title }}
       </span>
+      ({{ lowestScore }})
     </p>
     <p>
-      {{ highestScore }}
+      Meest gewaardeerde films
       <span
         v-for="movie in bestMovies"
         :key="movie.Title"
       >
-        {{ movie.Title }}
+        {{ movie.Title }},
       </span>
-      {{ average }}
+      ({{ highestScore }})
     </p>
+    <p>Gemiddelde score: {{ average }}</p>
   </div>
 </template>
 
@@ -65,7 +75,7 @@ export default {
       );
     },
 
-    favoriteActorsCount() {
+    favoriteActors() {
       const data = this.bestActors.filter(
         actor => actor.count === this.favoriteActorCount,
       );
@@ -100,3 +110,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.meta-info {
+  padding: 1em;
+}
+</style>

@@ -1,8 +1,23 @@
 <template>
-  <div>
-    <strong>{{ movie.Title }}</strong><br>
-    {{ fullName }}
-  </div>
+  <details>
+    <summary>
+      <strong>{{ movie.Title }}</strong><br>
+      {{ fullName }}
+    </summary>
+    <div class="content">
+      <img
+        :src="movie.Poster"
+        alt=""
+      >
+      <div class="text">
+        <p>{{ movie.Plot }}</p>
+        <a
+          :href="`https://www.imdb.com/title/${movie.imdbID}/`"
+          target="_blank"
+        >IMDB</a>
+      </div>
+    </div>
+  </details>
 </template>
 
 <script>
@@ -26,3 +41,11 @@ export default {
   },
 };
 </script>
+
+<style lang="postcss" scoped>
+.content {
+  display: grid;
+  grid-template-columns: 5em auto;
+  grid-gap: 1em;
+}
+</style>
