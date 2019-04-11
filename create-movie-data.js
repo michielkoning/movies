@@ -1,5 +1,6 @@
 const testFolder = './movies/';
 const fs = require('fs');
+const slugify = require('slugify');
 
 const array = [];
 fs.readdir(testFolder, (err, files) => {
@@ -23,6 +24,7 @@ fs.readdir(testFolder, (err, files) => {
 
       data.Director = getDirector(data.Director);
       data.imdbRating = Number(data.imdbRating);
+      data.Slug = slugify(data.Title.toLowerCase());
 
       // delete data.Awards;
       // delete data.Released;
