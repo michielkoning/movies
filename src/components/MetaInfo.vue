@@ -18,7 +18,7 @@
       >
         {{ movie.Title }}
       </span>
-      ({{ lowestScore }})
+      ({{ lowestScore| roundAverage }})
     </p>
     <p>
       Meest gewaardeerde films
@@ -28,14 +28,25 @@
       >
         {{ movie.Title }},
       </span>
-      ({{ highestScore }})
+      ({{ highestScore | roundAverage }})
     </p>
-    <p>Gemiddelde score: {{ average }}</p>
+    <p>Gemiddelde score: {{ average | roundAverage }}</p>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
+  filters: {
+    roundAverage(value) {
+      const formatter = new Intl.NumberFormat('nl-NL', {
+        style: 'decimal',
+        maximumFractionDigits: 2,
+      });
+      return formatter.format(value);
+    },
+  },
   props: {
     data: {
       type: Array,
@@ -44,14 +55,15 @@ export default {
   },
 
   computed: {
-    actors() {
-      let newArray = [];
+    ...mapGetters({
+      average: 'movies/averageScore',
+      lowestScore: 'movies/lowestScore',
+      highestScore: 'movies/highestScore',
+      worstMovies: 'movies/worstMovies',
+      bestMovies: 'movies/bestMovies',
+      actors: 'movies/actors',
+    }),
 
-      this.data.forEach((item) => {
-        newArray = [...newArray, ...item.Actors];
-      });
-      return newArray;
-    },
     bestActors() {
       const countDublicates = this.actors.reduce((obj, item) => {
         if (!obj[item]) {
@@ -80,32 +92,6 @@ export default {
         actor => actor.count === this.favoriteActorCount,
       );
       return data;
-    },
-
-    lowestScore() {
-      return this.data.reduce(
-        (min, movie) => (movie.imdbRating < min ? movie.imdbRating : min),
-        10,
-      );
-    },
-    highestScore() {
-      return this.data.reduce(
-        (max, movie) => (movie.imdbRating > max ? movie.imdbRating : max),
-        0,
-      );
-    },
-    average() {
-      return (
-        this.data.reduce((prev, current) => prev + current.imdbRating, 0)
-        / this.data.length
-      );
-    },
-    worstMovies() {
-      return this.data.filter(movie => movie.imdbRating === this.lowestScore);
-    },
-
-    bestMovies() {
-      return this.data.filter(movie => movie.imdbRating === this.highestScore);
     },
   },
 };

@@ -1,23 +1,10 @@
 <template>
-  <details>
-    <summary>
+  <div>
+    <router-link :to="{name: 'details', params: { slug: movie.Slug }}">
       <strong>{{ movie.Title }}</strong><br>
       {{ fullName }}
-    </summary>
-    <div class="content">
-      <img
-        :src="movie.Poster"
-        alt=""
-      >
-      <div class="text">
-        <p>{{ movie.Plot }}</p>
-        <a
-          :href="`https://www.imdb.com/title/${movie.imdbID}/`"
-          target="_blank"
-        >IMDB</a>
-      </div>
-    </div>
-  </details>
+    </router-link>
+  </div>
 </template>
 
 <script>
@@ -47,5 +34,10 @@ export default {
   display: grid;
   grid-template-columns: 5em auto;
   grid-gap: 1em;
+}
+
+a {
+  text-decoration: none;
+  display: block;
 }
 </style>

@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "start": "vue-cli-service serve",
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
@@ -13,7 +13,9 @@
     "core-js": "^2.6.5",
     "register-service-worker": "^1.6.2",
     "slugify": "^1.3.4",
-    "vue": "^2.6.6"
+    "vue": "^2.6.6",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.2.0",

@@ -1,5 +1,6 @@
 <template>
-  <div v-if="data">
+  <div v-if="sortedMovies">
+    <meta-info :data="list" />
     <div
       class="wrapper"
       :class="`sort-by-${sortKey}`"
@@ -21,18 +22,14 @@
         tag="div"
       >
         <div
-          v-for="(category, index) in movies"
+          v-for="(category, index) in sortedMovies"
           :key="`year-${index}`"
           class="category"
         >
-          <div
-            class="year"
-          >
+          <div class="year">
             <span>{{ category.group }}</span>
           </div>
-          <div
-            class="list"
-          >
+          <div class="list">
             <ul>
               <li
                 v-for="movie in category.children"
@@ -45,7 +42,6 @@
         </div>
       </transition-group>
     </div>
-    <meta-info :data="data" />
   </div>
 </template>
 
@@ -53,6 +49,7 @@
 import axios from 'axios';
 import MetaInfo from '@/components/MetaInfo.vue';
 import Movie from '@/components/Movie.vue';
+import { mapGetters, mapState } from 'vuex';
 
 export default {
   components: {
@@ -61,26 +58,23 @@ export default {
   },
   data() {
     return {
-      movies: [],
-      data: [],
+      sortedMovies: [],
       sortKey: 'Name',
     };
   },
 
+  computed: {
+    ...mapState('movies', ['list']),
+  },
   mounted() {
-    this.getMovies();
+    this.groupByTitle();
   },
 
   methods: {
-    async getMovies() {
-      const response = await axios.get('/data/movies.json');
-      this.data = response.data;
-      this.groupByTitle();
-    },
     groupByTitle() {
       this.sortByName();
 
-      this.movies = this.data.reduce(
+      this.sortedMovies = this.list.reduce(
         (result, movie) => this.groupByKey(movie.Title[0], result, movie),
         {},
       );
@@ -95,14 +89,14 @@ export default {
       return `${director.FirstName} ${director.LastName} `;
     },
     groupByYear() {
-      this.movies = this.data.reduce(
+      this.sortedMovies = this.list.reduce(
         (result, movie) => this.groupByKey(movie.Year, result, movie),
         {},
       );
       this.sortKey = 'year';
     },
     sortByName() {
-      return this.data.sort((a, b) => {
+      return this.list.sort((a, b) => {
         if (a.Title < b.Title) {
           return -1;
         }
@@ -113,7 +107,7 @@ export default {
       });
     },
     sortByDirector() {
-      this.data.sort((a, b) => {
+      this.list.sort((a, b) => {
         if (a.Director.LastName < b.Director.LastName) {
           return -1;
         }
@@ -126,7 +120,7 @@ export default {
     groupByDirector() {
       this.sortByDirector();
 
-      this.movies = this.data.reduce(
+      this.sortedMovies = this.list.reduce(
         (result, movie) => this.groupByKey(movie.Director.LastName[0], result, movie),
         {},
       );
