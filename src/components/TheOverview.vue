@@ -1,46 +1,40 @@
 <template>
   <div v-if="sortedMovies">
-    <meta-info :data="list" />
     <div
       class="wrapper"
       :class="`sort-by-${sortKey}`"
     >
+      <meta-info />
+
       <div class="buttons">
         Sorteer op:
-        <button @click="groupByYear">
+        <button
+          :class="{'is-active': sortKey === 'year'}"
+          @click="groupByYear"
+        >
           Jaar
         </button>
-        <button @click="groupByTitle">
+        <button
+          :class="{'is-active': sortKey === 'title'}"
+          @click="groupByTitle"
+        >
           Name
         </button>
-        <button @click="groupByDirector">
+        <button
+          :class="{'is-active': sortKey === 'director'}"
+          @click="groupByDirector"
+        >
           Director
         </button>
       </div>
-      <transition-group
-        name="flip-list"
-        tag="div"
-      >
-        <div
-          v-for="(category, index) in sortedMovies"
-          :key="`year-${index}`"
-          class="category"
+      <ul>
+        <li
+          v-for="movie in list"
+          :key="movie.Title"
         >
-          <div class="year">
-            <span>{{ category.group }}</span>
-          </div>
-          <div class="list">
-            <ul>
-              <li
-                v-for="movie in category.children"
-                :key="movie.Title"
-              >
-                <movie :movie="movie" />
-              </li>
-            </ul>
-          </div>
-        </div>
-      </transition-group>
+          <movie :movie="movie" />
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -72,12 +66,13 @@ export default {
 
   methods: {
     groupByTitle() {
-      this.sortByName();
+      this.sortedMovies = this.list;
+      // this.sortByName();
 
-      this.sortedMovies = this.list.reduce(
-        (result, movie) => this.groupByKey(movie.Title[0], result, movie),
-        {},
-      );
+      // this.sortedMovies = this.list.reduce(
+      //   (result, movie) => this.groupByKey(movie.Title[0], result, movie),
+      //   {},
+      // );
       this.sortKey = 'title';
     },
     fullName(director) {
@@ -137,6 +132,10 @@ export default {
       // return accumulator
       return result;
     },
+
+    indexOfMovie(movie) {
+      return this.list.findIndex(item => item === movie);
+    },
   },
 };
 </script>
@@ -183,8 +182,12 @@ export default {
 .sort-by-director,
 .sort-by-title {
   & .year {
-    flex-basis: 2em;
+    flex-basis: 1em;
   }
+}
+
+.is-active {
+  text-decoration: underline;
 }
 
 .category {
@@ -198,11 +201,6 @@ export default {
 ul {
   list-style: none outside;
   padding: 0;
-  margin: 0;
-}
-
-li {
-  padding-bottom: 0.25em;
 }
 
 p {
@@ -219,5 +217,9 @@ strong {
 
 button {
   margin-left: 0.25em;
+}
+
+ul {
+  flex: 0 1 100%;
 }
 </style>

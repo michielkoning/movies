@@ -19,12 +19,12 @@ body {
   -webkit-text-size-adjust: 100%;
   line-height: var(--line-height-base);
   font-weight: var(--font-weight-normal);
-  color: var(--text-color);
+  color: var(--black);
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-family: var(--font-family-base);
   font-display: optional;
-  font-variation-settings: 'wght' 1 999;
+  font-variation-settings: 'wght' 400;
 }
 
 p {

@@ -20,10 +20,21 @@ button {
 }
 
 a {
-  color: var(--primary-color);
+  color: var(--black);
   text-decoration-skip: auto;
+  @media (--print) {
+    text-decoration: none;
+  }
 
   &:hover {
     text-decoration: underline;
+  }
+
+  @media (--print) {
+    &::after {
+      content: ' (' attr(href) ') ';
+      font-size: 0.8em;
+      font-weight: normal;
+    }
   }
 }

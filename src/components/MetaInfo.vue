@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="data"
-    class="meta-info"
-  >
+  <div class="meta-info">
     <p>
       Favoriete acteurs:
       <span
@@ -32,6 +29,7 @@
     </p>
     <p>Gemiddelde score: {{ average | roundAverage }}</p>
   </div>
+  </divclass="meta-info">
 </template>
 
 <script>
@@ -45,12 +43,6 @@ export default {
         maximumFractionDigits: 2,
       });
       return formatter.format(value);
-    },
-  },
-  props: {
-    data: {
-      type: Array,
-      required: true,
     },
   },
 
@@ -96,9 +88,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.meta-info {
-  padding: 1em;
-}
-</style>

@@ -23,7 +23,7 @@ select {
   background: var(--white);
   width: 100%;
   height: auto;
-  color: var(--text-color);
+  color: var(--black);
   padding: 0.25rem 0.25rem;
   font-size: 1rem;
   font-family: inherit;
@@ -42,4 +42,8 @@ select {
   &:focus {
     outline: none;
   }
+}
+
+input[type='search']::-webkit-search-cancel-button {
+  display: none;
 }
