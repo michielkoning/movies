@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="!loading"
+    v-if="list.length"
     id="app"
   >
     <the-overview />
@@ -9,35 +9,24 @@
 
 <script>
 import TheOverview from '@/components/TheOverview.vue';
-import axios from 'axios';
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 export default {
   components: {
     TheOverview,
   },
 
-  data() {
-    return {
-      loading: true,
-    };
+  computed: {
+    ...mapState('movies', ['list']),
   },
   mounted() {
-    this.getMovies();
+    this.setMovies();
   },
 
   methods: {
     ...mapActions({
       setMovies: 'movies/set',
     }),
-    async getMovies() {
-      try {
-        const response = await axios.get('/data/movies.json');
-        this.setMovies(response.data);
-      } finally {
-        this.loading = false;
-      }
-    },
   },
 };
 </script>

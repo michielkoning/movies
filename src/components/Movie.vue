@@ -72,6 +72,8 @@ p {
 }
 
 details {
+  transition: all 2s;
+  background: white;
   &[open] {
     background: linear-gradient(
       90deg,

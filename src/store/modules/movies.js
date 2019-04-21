@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const groupByKey = (group, result, movie) => {
   if (!result[group]) {
     result[group] = { group, children: [movie] };
@@ -45,13 +47,21 @@ const getters = {
 
 const mutations = {
   set: (state, payload) => {
-    state.list = payload;
+    const newState = state;
+    newState.list = payload;
   },
 };
 
 const actions = {
-  set: ({ commit }, payload) => {
-    commit('set', payload);
+  set: async ({ commit }) => {
+    try {
+      const response = await axios.get('/data/movies.json');
+      commit('set', response.data);
+    } catch (error) {
+      window.console.error(error);
+    } finally {
+      // this.isLoading = false;
+    }
   },
 };
 
