@@ -2,9 +2,9 @@ const axios = require('axios');
 
 const fs = require('fs');
 
-const movies = ['tt0119698'];
+const movies = ['tt4686844'];
 
-const writeMovie = (title) => {
+const writeMovie = title => {
   axios
     .get('http://www.omdbapi.com/', {
       params: {
@@ -12,8 +12,8 @@ const writeMovie = (title) => {
         i: title,
       },
     })
-    .then((response) => {
-      fs.writeFile(`./movies/${response.data.Title}.json`, JSON.stringify(response.data), (err) => {
+    .then(response => {
+      fs.writeFile(`./movies/${response.data.Title}.json`, JSON.stringify(response.data), err => {
         if (err) {
           return console.log(err);
         }
