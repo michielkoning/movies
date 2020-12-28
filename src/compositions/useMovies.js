@@ -1,43 +1,43 @@
-import { readonly, computed } from 'vue';
+import { computed } from 'vue';
 import movies from '@/data/movies.json';
 
 export default () => {
-  const list = readonly(movies);
+  // const movies = readonly(movies);
   const averageScore = computed(() => {
     const score =
-      list.reduce((prev, current) => prev + current.imdbRating, 0) /
-      list.length;
+      movies.reduce((prev, current) => prev + current.imdbRating, 0) /
+      movies.length;
 
     return Math.round(score * 10) / 10;
   });
 
   const worstMovies = computed(() => {
-    const lowestScore = list.reduce(
+    const lowestScore = movies.reduce(
       (min, movie) => (movie.imdbRating < min ? movie.imdbRating : min),
       10,
     );
 
-    return list.filter(movie => movie.imdbRating === lowestScore);
+    return movies.filter(movie => movie.imdbRating === lowestScore);
   });
   const bestMovies = computed(() => {
-    const highestScore = list.reduce(
+    const highestScore = movies.reduce(
       (max, movie) => (movie.imdbRating > max ? movie.imdbRating : max),
       0,
     );
 
-    return list.filter(movie => movie.imdbRating === highestScore);
+    return movies.filter(movie => movie.imdbRating === highestScore);
   });
 
   const actors = computed(() => {
     let newArray = [];
-    list.forEach(item => {
+    movies.forEach(item => {
       newArray = [...newArray, ...item.Actors];
     });
     return newArray;
   });
 
   return {
-    list,
+    movies,
     averageScore,
     actors,
     worstMovies,
