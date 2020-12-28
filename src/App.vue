@@ -1,49 +1,26 @@
 <template>
-  <div
-    v-if="list.length"
-    id="app"
-  >
-    <the-overview />
-  </div>
+  <main class="center">
+    <ul>
+      <li v-for="movie in list" :key="movie.Slug">
+        {{ movie.Title }}
+      </li>
+    </ul>
+  </main>
 </template>
 
 <script>
-import TheOverview from '@/components/TheOverview.vue';
-import { mapActions, mapState } from 'vuex';
+import useMovies from '@/compositions/useMovies';
 
 export default {
-  components: {
-    TheOverview,
-  },
-
-  computed: {
-    ...mapState('movies', ['list']),
-  },
-  mounted() {
-    this.setMovies();
-  },
-
-  methods: {
-    ...mapActions({
-      setMovies: 'movies/set',
-    }),
+  setup() {
+    const { list } = useMovies();
+    return {
+      list,
+    };
   },
 };
 </script>
 
-
-<style scoped lang="postcss">
+<style lang="postcss">
 @import './styles/app.css';
-
-@font-face {
-  font-family: 'body';
-  src: url('/fonts/CrimsonPro-Roman-VF.ttf') format('truetype');
-  font-weight: 1 999;
-}
-
-@font-face {
-  font-family: 'header';
-  src: url('/fonts/MovementV.ttf') format('truetype');
-  font-weight: 1 999;
-}
 </style>

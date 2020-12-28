@@ -40,37 +40,47 @@ fs.readdir(testFolder, (err, files) => {
       // delete data.BoxOffice;
       // delete data.Production;
       // delete data.Website;
-      if (data.Poster) {
-        getColors(data.Poster).then((colors) => {
-          const hex = colors.map(color => color.hex());
-          data.bgColor = hex;
-          data.darkTextColor = chroma.contrast(colors[0].hex(), '#fff') < 4.5;
+      // if (data.Poster) {
+      //   getColors(data.Poster).then((colors) => {
+      //     const hex = colors.map(color => color.hex());
+      //     data.bgColor = hex;
+      //     data.darkTextColor = chroma.contrast(colors[0].hex(), '#fff') < 4.5;
 
-          const newData = JSON.stringify(data);
+      //     const newData = JSON.stringify(data);
 
-          array.push(newData);
-          if (index === files.length - 1) {
-            fs.writeFile('./public/data/movies.json', `[${array}]`, (err) => {
-              if (err) {
-                return console.log(err);
-              }
+      //     array.push(newData);
+      //     if (index === files.length - 1) {
+      //       fs.writeFile('./public/data/movies.json', `[${array}]`, (err) => {
+      //         if (err) {
+      //           return console.log(err);
+      //         }
 
-              console.log('The file was saved!');
-            });
+      //         console.log('The file was saved!');
+      //       });
+      //     }
+      //   });
+      // } else {
+      data.bgColor = '#fff';
+      data.lightTextColor = false;
+      const newData = JSON.stringify(data);
+      console.log(newData);
+
+      array.push(newData);
+
+      if (index === files.length - 1) {
+        fs.writeFile('./public/data/movies.json', `[${array}]`, err => {
+          if (err) {
+            return console.log(err);
           }
-        });
-      } else {
-        data.bgColor = '#fff';
-        data.lightTextColor = false;
-        const newData = JSON.stringify(data);
 
-        array.push(newData);
+          console.log('The file was saved!');
+        });
       }
     });
   });
 });
 
-const getDirector = (director) => {
+const getDirector = director => {
   if (director === 'Alejandro G. Iñárritu') {
     return createFullName('Alejandro.', 'Iñárritu', 'G');
   }
