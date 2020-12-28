@@ -1,5 +1,9 @@
 <template>
   <main class="center">
+    {{ averageScore }}
+    {{ highestScore }}
+    {{ lowestScore }}
+    {{ bestMovies }}
     <ul>
       <li v-for="movie in list" :key="movie.Slug">
         {{ movie.Title }}
@@ -13,9 +17,23 @@ import useMovies from '@/compositions/useMovies';
 
 export default {
   setup() {
-    const { list } = useMovies();
+    const {
+      list,
+      averageScore,
+      highestScore,
+      lowestScore,
+      actors,
+      worstMovies,
+      bestMovies,
+    } = useMovies();
     return {
       list,
+      averageScore,
+      highestScore,
+      lowestScore,
+      actors,
+      worstMovies,
+      bestMovies,
     };
   },
 };
