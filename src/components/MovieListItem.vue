@@ -1,14 +1,14 @@
 <template>
   <li>
     <img
-      v-if="movie.Poster && movie.Poster !== 'N/A'"
-      :src="movie.Poster"
+      v-if="movie.poster && movie.poster !== 'N/A'"
+      :src="movie.poster"
       alt=""
       loading="lazy"
       width="300"
       height="445"
     />
-    {{ movie.Title }} ({{ movie.Year }})
+    {{ movie.title }} ({{ movie.year }})
   </li>
 </template>
 
@@ -32,5 +32,6 @@ li {
 img {
   display: block;
   margin: 0;
+  width: 100%;
 }
 </style>

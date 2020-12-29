@@ -4,9 +4,9 @@
   --gray: #ccc;
 }
 
-@media (--dark-mode) {
+/* @media (--dark-mode) {
   :root {
     --black: #fff;
     --white: #000;
   }
-}
+} */

@@ -1,6 +1,6 @@
 <template>
   <ul class="list">
-    <movie-list-item v-for="movie in movies" :key="movie.Slug" :movie="movie" />
+    <movie-list-item v-for="movie in movies" :key="movie.slug" :movie="movie" />
   </ul>
 </template>
 
@@ -34,6 +34,11 @@ export default {
 
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(8em, 1fr));
+
+  grid-template-columns: repeat(2, 1fr);
+
+  @media (--viewport-sm) {
+    grid-template-columns: repeat(auto-fit, minmax(9em, 1fr));
+  }
 }
 </style>

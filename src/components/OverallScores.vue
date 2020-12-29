@@ -25,15 +25,15 @@ export default {
 
     const bestMoviesText = computed(() => {
       const list = bestMovies.value.map(movie => {
-        return movie.Title;
+        return movie.title;
       });
-      return `${list.join(', ')} (${bestMovies.value[0].imdbRating})`;
+      return `${list.join(', ')} (${bestMovies.value[0].rating})`;
     });
     const worstMoviesText = computed(() => {
       const list = worstMovies.value.map(movie => {
-        return movie.Title;
+        return movie.title;
       });
-      return `${list.join(', ')} (${worstMovies.value[0].imdbRating})`;
+      return `${list.join(', ')} (${worstMovies.value[0].rating})`;
     });
     return {
       averageScore,

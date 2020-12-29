@@ -13,13 +13,17 @@ const writeMovie = title => {
       },
     })
     .then(response => {
-      fs.writeFile(`./movies/${response.data.Title}.json`, JSON.stringify(response.data), err => {
-        if (err) {
-          return console.log(err);
-        }
+      fs.writeFile(
+        `./movies/${response.data.Title}.json`,
+        JSON.stringify(response.data),
+        err => {
+          if (err) {
+            return console.log(err);
+          }
 
-        console.log('The file was saved!');
-      });
+          console.log('The file was saved!');
+        },
+      );
     });
 };
 

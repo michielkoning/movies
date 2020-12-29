@@ -2,5 +2,6 @@
 @custom-media --portrait (orientation: portrait);
 @custom-media --landscape (orientation: landscape);
 @custom-media --viewport-md (width >= 1024px);
+@custom-media --viewport-sm (width >= 480px);
 @custom-media --print only print;
 @custom-media --screen only screen;
