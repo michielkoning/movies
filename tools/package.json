@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "axios": "^0.21.1",
+    "chroma-js": "^2.1.0",
     "get-image-colors": "^4.0.0",
     "slugify": "^1.4.6"
   }

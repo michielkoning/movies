@@ -1,0 +1,17 @@
+/* ubuntu-300 - latin */
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Ubuntu'),
+    url('../../fonts/ubuntu-v15-latin-300.woff2') format('woff2');
+}
+
+/* ubuntu-regular - latin */
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Ubuntu'),
+    url('../../fonts/ubuntu-v15-latin-regular.woff2') format('woff2');
+}

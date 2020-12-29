@@ -2,6 +2,7 @@ const testFolder = './movies/';
 const fs = require('fs');
 const slugify = require('slugify');
 const getColors = require('get-image-colors');
+const chroma = require('chroma-js');
 
 const createFullName = (firstName, lastName, middleName) => ({
   FirstName: firstName,
@@ -52,6 +53,8 @@ fs.readdir(testFolder, (folderError, files) => {
         rating: Number(data.imdbRating),
         slug: slugify(data.Title.toLowerCase()),
         description: data.Plot,
+        color: '#fff',
+        image: `/img/${data.Image}`,
       };
       delete data.Genres;
 
@@ -65,40 +68,45 @@ fs.readdir(testFolder, (folderError, files) => {
       data.imdbRating = Number(data.imdbRating);
       data.Slug = slugify(data.Title.toLowerCase());
 
-      // if (data.Poster) {
-      //   getColors(data.Poster).then((colors) => {
-      //     const hex = colors.map(color => color.hex());
-      //     data.bgColor = hex;
-      //     data.darkTextColor = chroma.contrast(colors[0].hex(), '#fff') < 4.5;
+      if (data.Poster) {
+        getColors(data.Poster).then(colors => {
+          // const hex = colors.map(color => {
+          //   // return color;
+          //   const color1 =
+          //   return chroma(color)
+          //     .brighten(4)
+          //     .hex();
+          // });
 
-      //     const newData = JSON.stringify(data);
-
-      //     array.push(newData);
-      //     if (index === files.length - 1) {
-      //       fs.writeFile('./public/data/movies.json', `[${array}]`, (err) => {
-      //         if (err) {
-      //           return console.log(err);
-      //         }
-
-      //         console.log('The file was saved!');
-      //       });
-      //     }
-      //   });
-      // } else {
-      data.bgColor = '#fff';
-      data.lightTextColor = false;
-      const newData = JSON.stringify(movie);
-
-      array.push(JSON.stringify(movie));
-
-      if (index === files.length - 1) {
-        fs.writeFile('./../src/data/movies.json', `[${array}]`, err => {
-          if (err) {
-            return console.log(err);
+          const color1 = colors[0];
+          const color2 = colors[1];
+          let colorsDarkToLight = [];
+          if (chroma(color1).luminance() < chroma(color2).luminance()) {
+            colorsDarkToLight = [color1, color2];
+          } else {
+            colorsDarkToLight = [color2, color2];
           }
+          colorsDarkToLight = colorsDarkToLight.map(color =>
+            chroma(color)
+              .brighten(3)
+              .hex(),
+          );
+          movie.colors = colorsDarkToLight;
 
-          console.log('The file was saved!');
+          array.push(JSON.stringify(movie));
+
+          if (index === files.length - 1) {
+            fs.writeFile('./../src/data/movies.json', `[${array}]`, err => {
+              if (err) {
+                return console.log(err);
+              }
+
+              console.log('The file was saved!');
+            });
+          }
         });
+      } else {
+        array.push(JSON.stringify(movie));
       }
     });
   });
