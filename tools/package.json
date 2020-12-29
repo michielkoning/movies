@@ -8,7 +8,9 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "yargs": "^16.2.0"
+  },
   "devDependencies": {
     "axios": "^0.21.1",
     "get-image-colors": "^4.0.0",

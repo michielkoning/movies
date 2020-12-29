@@ -32,11 +32,11 @@ const getDirector = director => {
 };
 
 const array = [];
-fs.readdir(testFolder, (err, files) => {
+fs.readdir(testFolder, (folderError, files) => {
   files.forEach((file, index) => {
-    fs.readFile(`./movies/${file}`, 'utf8', (err, jsonString) => {
-      if (err) {
-        console.log('File read failed:', err);
+    fs.readFile(`./movies/${file}`, 'utf8', (filerError, jsonString) => {
+      if (filerError) {
+        console.log('File read failed:', filerError);
         return;
       }
 
@@ -48,9 +48,10 @@ fs.readdir(testFolder, (err, files) => {
         year: data.Year,
         actors: data.Actors.split(','),
         genres: data.Genre.split(','),
-        poster: data.Poster,
+        poster: data.Poster !== 'N/A' ? data.Poster : null,
         rating: Number(data.imdbRating),
         slug: slugify(data.Title.toLowerCase()),
+        description: data.Plot,
       };
       delete data.Genres;
 

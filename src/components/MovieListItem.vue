@@ -1,14 +1,16 @@
 <template>
   <li>
-    <img
-      v-if="movie.poster && movie.poster !== 'N/A'"
-      :src="movie.poster"
-      alt=""
-      loading="lazy"
-      width="300"
-      height="445"
-    />
-    {{ movie.title }} ({{ movie.year }})
+    <div>
+      <img
+        v-if="movie.poster"
+        :src="movie.poster"
+        alt=""
+        loading="lazy"
+        width="300"
+        height="445"
+      />
+    </div>
+    <div>{{ movie.title }} ({{ movie.year }})</div>
   </li>
 </template>
 
@@ -25,8 +27,12 @@ export default {
 
 <style lang="postcss" scoped>
 li {
-  grid-template-columns: subgrid;
+  grid-row: span 2;
+  display: grid;
+  grid-template-rows: subgrid;
   text-align: center;
+  grid-gap: 0.25em;
+  line-height: 1.2;
 }
 
 img {

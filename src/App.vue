@@ -1,7 +1,7 @@
 <template>
   <main class="center">
-    <overall-scores />
     <movie-list />
+    <overall-scores />
   </main>
 </template>
 
