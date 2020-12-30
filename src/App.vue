@@ -1,6 +1,6 @@
 <template>
   <center-wrapper>
-    <main class="center">
+    <main>
       <movie-list />
       <overall-scores />
     </main>
