@@ -49,7 +49,7 @@ export default {
 <style lang="postcss" scoped>
 dl {
   display: grid;
-  grid-template-columns: 10em auto;
+  grid-template-columns: 9em auto;
   grid-gap: 0.25em 0.5em;
 }
 </style>
