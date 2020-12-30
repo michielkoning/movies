@@ -18,5 +18,5 @@ html {
 body {
   margin: 0;
   padding: var(--gutter) 0 3em;
-  background-color: var(--white);
+  background-color: #f0f5f9;
 }

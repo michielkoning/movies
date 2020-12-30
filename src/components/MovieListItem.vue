@@ -46,6 +46,7 @@ li {
   padding: 0 0 0.25em;
   border: 2px solid;
   grid-template-rows: 14em auto auto;
+  background-color: var(--white);
 
   @supports (grid-template-rows: subgrid) {
     grid-template-rows: subgrid;

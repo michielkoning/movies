@@ -1,4 +1,12 @@
 module.exports = {
+  pwa: {
+    name: 'Films',
+    appleMobileWebAppCapable: 'yes',
+    manifestOptions: {
+      description: 'Mijn favoriete films',
+      lang: 'nl',
+    },
+  },
   chainWebpack: config => {
     const svgRule = config.module.rule('svg');
 
