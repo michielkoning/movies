@@ -44,4 +44,12 @@ const getMovie = async movie => {
   });
 };
 
-getMovie('tt0068646');
+getMovie('tt0086879');
+
+// Three billboards
+// Parasite
+// Captain fantastic
+// Volver
+// The lobster
+// Amadeus
+// Blade runner 20149
