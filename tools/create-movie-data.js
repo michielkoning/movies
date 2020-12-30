@@ -32,7 +32,7 @@ const getDirector = director => {
   return createFullName(firstName, lastName);
 };
 
-const array = [];
+let array = [];
 fs.readdir(testFolder, (folderError, files) => {
   files.forEach((file, index) => {
     fs.readFile(`./movies/${file}`, 'utf8', (filerError, jsonString) => {
@@ -54,7 +54,7 @@ fs.readdir(testFolder, (folderError, files) => {
         slug: slugify(data.Title.toLowerCase()),
         description: data.Plot,
         color: '#fff',
-        image: `/img/${data.Image}`,
+        // image: `/img/${data.Image}`,
       };
       delete data.Genres;
 
@@ -96,6 +96,7 @@ fs.readdir(testFolder, (folderError, files) => {
           array.push(JSON.stringify(movie));
 
           if (index === files.length - 1) {
+            array = array.sort((a, b) => a.title > b.title);
             fs.writeFile('./../src/data/movies.json', `[${array}]`, err => {
               if (err) {
                 return console.log(err);

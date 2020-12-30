@@ -41,12 +41,15 @@ export default {
 li {
   grid-row: span 3;
   display: grid;
-  grid-template-rows: subgrid;
   text-align: center;
   grid-gap: 0.25em;
   padding: 0 0 0.25em;
-  /* border-radius: 0.25em; */
   border: 2px solid;
+  grid-template-rows: 14em auto auto;
+
+  @supports (grid-template-rows: subgrid) {
+    grid-template-rows: subgrid;
+  }
 }
 
 img {
@@ -63,5 +66,6 @@ img {
 
 .year {
   font-weight: 300;
+  align-self: flex-end;
 }
 </style>
