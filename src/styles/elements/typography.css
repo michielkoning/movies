@@ -11,8 +11,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-family: var(--font-family-base);
-  font-display: optional;
-  font-variation-settings: 'wght' 400;
 }
 
 p {
@@ -31,7 +29,6 @@ h5 {
 h1,
 h2,
 h3 {
-  font-family: header, sans-serif;
   line-height: 1.1;
   font-weight: var(--font-weight-bold);
 }

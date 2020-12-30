@@ -65,7 +65,7 @@ img {
 }
 
 .year {
-  font-weight: 300;
+  font-weight: var(--font-weight-light);
   align-self: flex-end;
 }
 </style>
