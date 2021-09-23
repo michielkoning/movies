@@ -6,6 +6,9 @@ module.exports = {
       description: 'Mijn favoriete films',
       lang: 'nl',
     },
+    workboxOptions: {
+      exclude: ["netlify.toml"],
+    },
   },
   chainWebpack: config => {
     const svgRule = config.module.rule('svg');
